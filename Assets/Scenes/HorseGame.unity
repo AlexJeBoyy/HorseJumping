@@ -333,6 +333,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dd5d4cf8e05469045aad588c6a5f31b7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!95 &988912958 stripped
+Animator:
+  m_CorrespondingSourceObject: {fileID: 2512955966939442927, guid: 2f7970da223e2b54c97fd664ff1e4c1c, type: 3}
+  m_PrefabInstance: {fileID: 8739575010131461560}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1261312576
 GameObject:
   m_ObjectHideFlags: 0
@@ -531,6 +536,7 @@ MonoBehaviour:
   lastSpeed: 0
   gameSpeedIncrease: 0.1
   firstSteps: 0
+  birdAnim: {fileID: 988912958}
   animator: {fileID: 1261312579}
 --- !u!1001 &8739575010131461560
 PrefabInstance:
@@ -540,8 +546,8 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 1654815453168168045, guid: 2f7970da223e2b54c97fd664ff1e4c1c, type: 3}
-      propertyPath: m_SortingOrder
+    - target: {fileID: 5062996452765044959, guid: 2f7970da223e2b54c97fd664ff1e4c1c, type: 3}
+      propertyPath: m_IsTrigger
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6214197739160131126, guid: 2f7970da223e2b54c97fd664ff1e4c1c, type: 3}

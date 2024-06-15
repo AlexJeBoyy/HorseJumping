@@ -12,11 +12,13 @@ public class GameManager : MonoBehaviour
     public float initialGameSpeed = 0f;
     public float lastSpeed;
     public float gameSpeedIncrease = 0.1f;
-    public float gameSpeed { get; private set; }
-    Player player;
-
-
+    public float gameSpeed { get; private set; }    
     public bool firstSteps;
+    Player player;
+    public Animator birdAnim;
+
+
+    
     public Animator animator;
     private void Awake()
     {   
@@ -107,27 +109,32 @@ public class GameManager : MonoBehaviour
 
             }
         }
+        
         if (player.isJumping == false)
         {
             switch (activeState)
             {
                 case state.idle:
                     animator.speed = 1f;
+                    birdAnim.speed = 1f;
+
                     break;
                 case state.walking:
                     animator.speed = 0.5f * gameSpeed;
+                    birdAnim.speed = 0.5f * gameSpeed;
 
                     break;
                 case state.running:
                     animator.speed = 0.25f * gameSpeed;
+                    birdAnim.speed = 0.25f * gameSpeed;
                     break;
-
-
             }
         }
         else
         {
             animator.speed = 1f;
+            birdAnim.speed = 1f;
         }
+        
     }
 }
