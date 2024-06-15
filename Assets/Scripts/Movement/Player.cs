@@ -1,13 +1,16 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Diagnostics;
 using UnityEngine;
 
 public class Player : MonoBehaviour
 {
+    
     private CharacterController character;
     private Vector3 direction;
     public float gravity = 9.81f * 2;
     public float jumpForce = 8;
+    public bool isJumping = false;
 
     public Animator animator;
 
@@ -28,12 +31,13 @@ public class Player : MonoBehaviour
             direction = Vector3.down;
             if (Input.GetButton("Jump") || Input.GetKey(KeyCode.W))
             {
-
+                isJumping = true;
                 direction = Vector3.up * jumpForce;
                 animator.SetBool("isJumping", true);
             }
             else
             {
+                isJumping = false;
                 animator.SetBool("isJumping", false);
             }
         }

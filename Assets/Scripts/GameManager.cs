@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -12,12 +13,15 @@ public class GameManager : MonoBehaviour
     public float lastSpeed;
     public float gameSpeedIncrease = 0.1f;
     public float gameSpeed { get; private set; }
+    Player player;
 
 
     public bool firstSteps;
     public Animator animator;
     private void Awake()
-    {
+    {   
+        player = FindObjectOfType<Player>();
+        
         if (Instance == null)
         {
             Instance = this;
@@ -61,6 +65,7 @@ public class GameManager : MonoBehaviour
                 activeState = state.walking;
                 animator.SetBool("isIdle", false);
                 animator.SetBool("isWalking", true);
+                
                 if (firstSteps)
                 {
                     gameSpeed = lastSpeed;
@@ -101,6 +106,28 @@ public class GameManager : MonoBehaviour
                 gameSpeed = 0;
 
             }
+        }
+        if (player.isJumping == false)
+        {
+            switch (activeState)
+            {
+                case state.idle:
+                    animator.speed = 1f;
+                    break;
+                case state.walking:
+                    animator.speed = 0.5f * gameSpeed;
+
+                    break;
+                case state.running:
+                    animator.speed = 0.25f * gameSpeed;
+                    break;
+
+
+            }
+        }
+        else
+        {
+            animator.speed = 1f;
         }
     }
 }
