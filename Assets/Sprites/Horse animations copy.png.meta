@@ -318,7 +318,7 @@ TextureImporter:
         x: 12
         y: 464
         width: 35
-        height: 26
+        height: 27
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -338,7 +338,7 @@ TextureImporter:
         serializedVersion: 2
         x: 56
         y: 464
-        width: 33
+        width: 35
         height: 27
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
@@ -359,7 +359,7 @@ TextureImporter:
         serializedVersion: 2
         x: 98
         y: 464
-        width: 33
+        width: 35
         height: 27
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
@@ -380,7 +380,7 @@ TextureImporter:
         serializedVersion: 2
         x: 145
         y: 464
-        width: 33
+        width: 35
         height: 27
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
@@ -399,10 +399,10 @@ TextureImporter:
       name: Horse animations copy_13
       rect:
         serializedVersion: 2
-        x: 9
+        x: 8
         y: 418
-        width: 45
-        height: 23
+        width: 46
+        height: 25
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -442,9 +442,9 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 116
-        y: 417
+        y: 418
         width: 46
-        height: 26
+        height: 25
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -463,9 +463,9 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 168
-        y: 418
+        y: 417
         width: 46
-        height: 23
+        height: 25
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -486,7 +486,7 @@ TextureImporter:
         x: 224
         y: 418
         width: 46
-        height: 23
+        height: 25
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -507,7 +507,7 @@ TextureImporter:
         x: 280
         y: 418
         width: 46
-        height: 23
+        height: 25
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}

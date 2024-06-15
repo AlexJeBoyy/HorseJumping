@@ -9,10 +9,10 @@ public class GameManager : MonoBehaviour
     state activeState;
     public static GameManager Instance { get; private set; }
     public float initialGameSpeed = 0f;
-
+    public float lastSpeed;
     public float gameSpeedIncrease = 0.1f;
     public float gameSpeed { get; private set; }
-    public float firstSpeed;
+
 
     public bool firstSteps;
     public Animator animator;
@@ -44,8 +44,9 @@ public class GameManager : MonoBehaviour
     {
         activeState = state.idle;
         gameSpeed = initialGameSpeed;
-        firstSpeed = 2.5f;
+        lastSpeed = 2.5f;
         firstSteps = true;
+        animator.SetBool("isIdle", true);
     }
     private void Update()
     {
@@ -53,28 +54,52 @@ public class GameManager : MonoBehaviour
         {
             gameSpeed += gameSpeedIncrease * Time.deltaTime;
         }
-        if (Input.GetKeyDown(KeyCode.D))
+        if (Input.GetKeyDown(KeyCode.D) || Input.GetKeyDown(KeyCode.RightArrow))
         {
             if (activeState == state.idle)
             {
                 activeState = state.walking;
+                animator.SetBool("isIdle", false);
                 animator.SetBool("isWalking", true);
                 if (firstSteps)
                 {
-                    gameSpeed = firstSpeed;
+                    gameSpeed = lastSpeed;
                     firstSteps = false;
                 }
                 else
                 {
-                    //gameSpeed = past speed
+                    gameSpeed = lastSpeed;
                 }
             }
             else if (activeState == state.walking)
             {
-                animator.SetBool("isWalking", false);
                 animator.SetBool("isRunning", true);
+                animator.SetBool("isWalking", false);
+
                 activeState = state.running;
                 gameSpeed *= 1.5f;
+            }
+        }
+        else if (Input.GetKeyDown(KeyCode.A) || Input.GetKeyDown(KeyCode.LeftArrow))
+        {
+            if (activeState == state.running)
+            {
+                animator.SetBool("isWalking", true);
+                animator.SetBool("isRunning", false);
+
+                activeState = state.walking;
+                gameSpeed /= 1.5f;
+            }
+            else if (activeState == state.walking)
+            {
+                animator.SetBool("isIdle", true);
+                animator.SetBool("isWalking", false);
+
+                activeState = state.idle;
+
+                lastSpeed = gameSpeed;
+                gameSpeed = 0;
+
             }
         }
     }
