@@ -12,8 +12,10 @@ public class GameManager : MonoBehaviour
 
     public float gameSpeedIncrease = 0.1f;
     public float gameSpeed { get; private set; }
-    public float walkSpeed;
-    public float runSpeed;
+    public float firstSpeed;
+
+    public bool firstSteps;
+    public Animator animator;
     private void Awake()
     {
         if (Instance == null)
@@ -42,16 +44,37 @@ public class GameManager : MonoBehaviour
     {
         activeState = state.idle;
         gameSpeed = initialGameSpeed;
-        walkSpeed = 2.5f;
+        firstSpeed = 2.5f;
+        firstSteps = true;
     }
     private void Update()
     {
-        gameSpeed += gameSpeedIncrease * Time.deltaTime;
+        if (activeState != state.idle)
+        {
+            gameSpeed += gameSpeedIncrease * Time.deltaTime;
+        }
         if (Input.GetKeyDown(KeyCode.D))
         {
             if (activeState == state.idle)
             {
-                gameSpeed = walkSpeed;
+                activeState = state.walking;
+                animator.SetBool("isWalking", true);
+                if (firstSteps)
+                {
+                    gameSpeed = firstSpeed;
+                    firstSteps = false;
+                }
+                else
+                {
+                    //gameSpeed = past speed
+                }
+            }
+            else if (activeState == state.walking)
+            {
+                animator.SetBool("isWalking", false);
+                animator.SetBool("isRunning", true);
+                activeState = state.running;
+                gameSpeed *= 1.5f;
             }
         }
     }
