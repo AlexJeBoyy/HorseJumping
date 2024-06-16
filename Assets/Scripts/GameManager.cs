@@ -121,7 +121,7 @@ public class GameManager : MonoBehaviour
                     break;
                 case state.walking:
                     animator.speed = 0.5f * gameSpeed;
-                    birdAnim.speed = 0.5f * gameSpeed;
+                    birdAnim.speed = 0.4f * gameSpeed;
 
                     break;
                 case state.running:
