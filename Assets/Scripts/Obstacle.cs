@@ -4,15 +4,19 @@ using UnityEngine;
 
 public class Obstacle : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
+    private float leftEdge;
 
-    // Update is called once per frame
-    void Update()
+    private void Start()
     {
-        
+        leftEdge = Camera.main.ScreenToWorldPoint(Vector3.zero).x - 2f;
+    }
+    private void Update()
+    {
+        transform.position += Vector3.left * GameManager.Instance.gameSpeed * Time.deltaTime;
+
+        if(transform.position.x < leftEdge)
+        {
+            Destroy(gameObject);
+        }
     }
 }

@@ -5,7 +5,7 @@ using UnityEngine;
 public class Spawner : MonoBehaviour
 {
     [System.Serializable]
-   public struct SpawnableObject
+    public struct SpawnableObject
     {
         public GameObject prefab;
         [Range(0f, 1f)]
@@ -27,18 +27,23 @@ public class Spawner : MonoBehaviour
     }
     private void Spawn()
     {
+
         float spawnChance = Random.value;
 
         foreach (var obj in objects)
         {
-            if (spawnChance < obj.spawnChance)
+            if (GameManager.Instance.activeState != GameManager.state.idle)
             {
-                GameObject obstacle = Instantiate(obj.prefab);
-                obstacle.transform.position += transform.position;
-                break;
+                if (spawnChance < obj.spawnChance)
+                {
+                    GameObject obstacle = Instantiate(obj.prefab);
+                    obstacle.transform.position += transform.position;
+                    break;
+                }
+                spawnChance -= obj.spawnChance;
             }
-            spawnChance -= obj.spawnChance;
         }
-        Invoke(nameof(Spawn), Random.Range(minSpawnRate, maxSpawnRate));
+            Invoke(nameof(Spawn), Random.Range(minSpawnRate, maxSpawnRate));
+        
     }
 }

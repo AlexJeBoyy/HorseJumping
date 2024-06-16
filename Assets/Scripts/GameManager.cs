@@ -3,27 +3,30 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UIElements;
+using TMPro;
+using UnityEngine.UI;
 
 public class GameManager : MonoBehaviour
 {
-    enum state { idle, walking, running }
-    state activeState;
+    public enum state { idle, walking, running }
+    public state activeState;
     public static GameManager Instance { get; private set; }
     public float initialGameSpeed = 0f;
     public float lastSpeed;
     public float gameSpeedIncrease = 0.1f;
     public float gameSpeed { get; private set; }    
     public bool firstSteps;
-    Player player;
-    public Animator birdAnim;
-
-
     
+    public Animator birdAnim;
     public Animator animator;
+
+    private Player player;
+    private Spawner spawner;
+
+    public TextMeshProUGUI gameOverText;
+    public UnityEngine.UI.Button retryButton;
     private void Awake()
     {   
-        player = FindObjectOfType<Player>();
-        
         if (Instance == null)
         {
             Instance = this;
@@ -44,15 +47,41 @@ public class GameManager : MonoBehaviour
 
     private void Start()
     {
+        player = FindObjectOfType<Player>();
+        spawner = FindObjectOfType<Spawner>();
         NewGame();
     }
-    private void NewGame()
+    public void NewGame()
     {
+        Obstacle[] obstacles = FindObjectsOfType<Obstacle>();
+        foreach (var obstacle in obstacles)
+        {
+            Destroy(obstacle.gameObject);
+        }
         activeState = state.idle;
         gameSpeed = initialGameSpeed;
-        lastSpeed = 2.5f;
+        lastSpeed = 4f;
         firstSteps = true;
         animator.SetBool("isIdle", true);
+        animator.SetBool("isWalking", false);
+        animator.SetBool("isRunning", false);
+        animator.SetBool("isJumping", false);
+
+        enabled = true;
+        player.gameObject.SetActive(true);
+        spawner.gameObject.SetActive(true);
+        gameOverText.gameObject.SetActive(false);
+        retryButton.gameObject.SetActive(false);
+    }
+    public void GameOver()
+    {
+        gameSpeed = 0f;
+        enabled = false;
+        player.gameObject.SetActive(false);
+        spawner.gameObject.SetActive(false);
+        gameOverText.gameObject.SetActive(true);
+        retryButton.gameObject.SetActive(true);
+
     }
     private void Update()
     {
