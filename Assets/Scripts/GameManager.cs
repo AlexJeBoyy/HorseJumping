@@ -23,8 +23,14 @@ public class GameManager : MonoBehaviour
     private Player player;
     private Spawner spawner;
 
-    public TextMeshProUGUI gameOverText;
     public UnityEngine.UI.Button retryButton;
+    public UnityEngine.UI.Button resetButton;
+    public TextMeshProUGUI gameOverText;
+    public TextMeshProUGUI scoreText;
+    public TextMeshProUGUI hiscoreText;
+
+    public float score;
+
     private void Awake()
     {   
         if (Instance == null)
@@ -60,6 +66,7 @@ public class GameManager : MonoBehaviour
         }
         activeState = state.idle;
         gameSpeed = initialGameSpeed;
+        score = 0f;
         lastSpeed = 4f;
         firstSteps = true;
         animator.SetBool("isIdle", true);
@@ -72,6 +79,8 @@ public class GameManager : MonoBehaviour
         spawner.gameObject.SetActive(true);
         gameOverText.gameObject.SetActive(false);
         retryButton.gameObject.SetActive(false);
+        resetButton.gameObject.SetActive(false);
+        UpdateHiscore();
     }
     public void GameOver()
     {
@@ -81,10 +90,14 @@ public class GameManager : MonoBehaviour
         spawner.gameObject.SetActive(false);
         gameOverText.gameObject.SetActive(true);
         retryButton.gameObject.SetActive(true);
+        resetButton.gameObject.SetActive(true);
+        UpdateHiscore();
 
     }
     private void Update()
     {
+        score += gameSpeed * Time.deltaTime;
+        scoreText.text = Mathf.FloorToInt(score).ToString("D5");
         if (activeState != state.idle)
         {
             gameSpeed += gameSpeedIncrease * Time.deltaTime;
@@ -165,5 +178,23 @@ public class GameManager : MonoBehaviour
             birdAnim.speed = 1f;
         }
         
+    }
+    private void UpdateHiscore()
+    {
+        float hiscore = PlayerPrefs.GetFloat("hiscore", 0);
+
+        if(score > hiscore)
+        {
+            hiscore = score;
+            PlayerPrefs.SetFloat("hiscore", hiscore);
+        }
+
+        hiscoreText.text = Mathf.FloorToInt(hiscore).ToString("D5");
+    }
+    public void deleteScore()
+    {
+        score = 0f;
+        PlayerPrefs.DeleteAll();
+        UpdateHiscore();
     }
 }
