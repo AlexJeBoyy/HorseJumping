@@ -93,7 +93,7 @@ public class GameManager : MonoBehaviour
         gameOverText.gameObject.SetActive(false);
         retryButton.gameObject.SetActive(false);
         resetButton.gameObject.SetActive(false);
-        controls.gameObject.SetActive(false);
+        
         UpdateHiscore();
     }
     public void GameOver()
@@ -131,6 +131,7 @@ public class GameManager : MonoBehaviour
                 {
                     gameSpeed = lastSpeed;
                     firstSteps = false;
+                    controls.gameObject.SetActive(false);
                 }
                 else
                 {
