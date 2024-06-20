@@ -5,6 +5,7 @@ using UnityEngine;
 using UnityEngine.UIElements;
 using TMPro;
 using UnityEngine.UI;
+using Unity.VisualScripting;
 
 public class GameManager : MonoBehaviour
 {
@@ -30,9 +31,17 @@ public class GameManager : MonoBehaviour
     public TextMeshProUGUI hiscoreText;
 
     public float score;
+    public float maxRunSpeed = 1.5f;
+    public float minWalkingSpeed = 1f;
+
+    public Transform horse;
+    Vector3 scale;
+    public CharacterController ccPlayer;
+    public bool isSmall;
 
     private void Awake()
     {   
+
         if (Instance == null)
         {
             Instance = this;
@@ -55,6 +64,7 @@ public class GameManager : MonoBehaviour
     {
         player = FindObjectOfType<Player>();
         spawner = FindObjectOfType<Spawner>();
+        scale = horse.localScale;
         NewGame();
     }
     public void NewGame()
@@ -73,6 +83,8 @@ public class GameManager : MonoBehaviour
         animator.SetBool("isWalking", false);
         animator.SetBool("isRunning", false);
         animator.SetBool("isJumping", false);
+        GetBig();
+        isSmall = false;
 
         enabled = true;
         player.gameObject.SetActive(true);
@@ -100,16 +112,18 @@ public class GameManager : MonoBehaviour
         scoreText.text = Mathf.FloorToInt(score).ToString("D5");
         if (activeState != state.idle)
         {
+            // gameSpeed = (gameSpeed + gameSpeedIncrease * Time.deltaTime) * runSpeed
             gameSpeed += gameSpeedIncrease * Time.deltaTime;
         }
         if (Input.GetKeyDown(KeyCode.D) || Input.GetKeyDown(KeyCode.RightArrow))
         {
+
             if (activeState == state.idle)
             {
                 activeState = state.walking;
                 animator.SetBool("isIdle", false);
                 animator.SetBool("isWalking", true);
-                
+
                 if (firstSteps)
                 {
                     gameSpeed = lastSpeed;
@@ -151,7 +165,16 @@ public class GameManager : MonoBehaviour
 
             }
         }
-        
+        if (Input.GetKeyDown(KeyCode.Q))
+        {
+            GetSmall();
+            
+        }
+        else if (Input.GetKeyDown (KeyCode.E))
+        {
+            GetBig();
+        }
+
         if (player.isJumping == false)
         {
             switch (activeState)
@@ -177,7 +200,12 @@ public class GameManager : MonoBehaviour
             animator.speed = 1f;
             birdAnim.speed = 1f;
         }
-        
+
+        // function changeRunSpeed{
+        //  if state == running & runspeed < maxRunspeed
+            // runspeed + 0.1
+        //
+    
     }
     private void UpdateHiscore()
     {
@@ -196,5 +224,23 @@ public class GameManager : MonoBehaviour
         score = 0f;
         PlayerPrefs.DeleteAll();
         UpdateHiscore();
+    }
+    void GetSmall()
+    {
+        scale = horse.localScale;
+        //scale.x = 0.5f;
+        scale.y = 0.5f;
+        horse.localScale = scale;
+        ccPlayer.radius = 0.75f;
+        isSmall = true;
+    }
+    void GetBig()
+    {
+        scale = horse.localScale;
+        //scale.x = 1;
+        scale.y = 1;
+        horse.localScale = scale;
+        ccPlayer.radius = 1.13f;
+        isSmall = false;
     }
 }

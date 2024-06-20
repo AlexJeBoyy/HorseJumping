@@ -26,7 +26,7 @@ public class Player : MonoBehaviour
     private void Update()
     {
         direction += Vector3.down * gravity * Time.deltaTime;
-        if (character.isGrounded)
+        if (character.isGrounded && GameManager.Instance.isSmall == false)
         {
             direction = Vector3.down;
             if (Input.GetButton("Jump") || Input.GetKey(KeyCode.W))
@@ -43,6 +43,7 @@ public class Player : MonoBehaviour
         }
 
         character.Move(direction * Time.deltaTime);
+        
     }
 
     private void OnTriggerEnter(Collider other)

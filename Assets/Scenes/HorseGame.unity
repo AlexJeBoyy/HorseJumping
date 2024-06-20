@@ -951,7 +951,7 @@ MonoBehaviour:
     spawnChance: 0.12
   - prefab: {fileID: 9122285005102657005, guid: 39623131c93763a4eb8c03dc062821ef, type: 3}
     spawnChance: 0.1
-  minSpawnRate: 0.5
+  minSpawnRate: 0.75
   maxSpawnRate: 1.5
 --- !u!4 &952148042
 Transform:
@@ -1576,6 +1576,11 @@ MonoBehaviour:
   scoreText: {fileID: 1846737062}
   hiscoreText: {fileID: 697662793}
   score: 0
+  maxRunSpeed: 1.5
+  minWalkingSpeed: 1
+  horse: {fileID: 1261312578}
+  ccPlayer: {fileID: 1261312580}
+  isSmall: 0
 --- !u!1 &2068633510
 GameObject:
   m_ObjectHideFlags: 0
