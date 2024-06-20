@@ -29,6 +29,7 @@ public class GameManager : MonoBehaviour
     public TextMeshProUGUI gameOverText;
     public TextMeshProUGUI scoreText;
     public TextMeshProUGUI hiscoreText;
+    public TextMeshProUGUI controls;
 
     public float score;
     public float maxRunSpeed = 1.5f;
@@ -92,6 +93,7 @@ public class GameManager : MonoBehaviour
         gameOverText.gameObject.SetActive(false);
         retryButton.gameObject.SetActive(false);
         resetButton.gameObject.SetActive(false);
+        controls.gameObject.SetActive(false);
         UpdateHiscore();
     }
     public void GameOver()
@@ -103,6 +105,7 @@ public class GameManager : MonoBehaviour
         gameOverText.gameObject.SetActive(true);
         retryButton.gameObject.SetActive(true);
         resetButton.gameObject.SetActive(true);
+        controls.gameObject.SetActive(true);
         UpdateHiscore();
 
     }
