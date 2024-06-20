@@ -831,7 +831,7 @@ BoxCollider:
   m_Enabled: 1
   serializedVersion: 3
   m_Size: {x: 1, y: 1, z: 1}
-  m_Center: {x: 0, y: -1.3, z: 0}
+  m_Center: {x: 0, y: -0.93, z: 0}
 --- !u!4 &860801747
 Transform:
   m_ObjectHideFlags: 0
@@ -841,7 +841,7 @@ Transform:
   m_GameObject: {fileID: 860801744}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: -0.36, z: 0}
   m_LocalScale: {x: 25, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -951,8 +951,8 @@ MonoBehaviour:
     spawnChance: 0.12
   - prefab: {fileID: 9122285005102657005, guid: 39623131c93763a4eb8c03dc062821ef, type: 3}
     spawnChance: 0.1
-  minSpawnRate: 1
-  maxSpawnRate: 2
+  minSpawnRate: 0.5
+  maxSpawnRate: 1.5
 --- !u!4 &952148042
 Transform:
   m_ObjectHideFlags: 0
@@ -1566,7 +1566,7 @@ MonoBehaviour:
   activeState: 0
   initialGameSpeed: 0
   lastSpeed: 0
-  gameSpeedIncrease: 0.1
+  gameSpeedIncrease: 0.2
   firstSteps: 0
   birdAnim: {fileID: 2512955966939442927, guid: 2f7970da223e2b54c97fd664ff1e4c1c, type: 3}
   animator: {fileID: 1261312579}
