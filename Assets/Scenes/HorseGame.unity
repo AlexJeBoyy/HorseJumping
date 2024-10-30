@@ -581,11 +581,11 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 'Speed: A or D
+  m_text: 'Speed: A and D
 
-    Jump: W and Space
+    Jump: W or Space
 
-    Duck: Q or E'
+    Duck: Q and E'
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 18efc7fd03543a4458e0df38d4e6ca6d, type: 2}
   m_sharedMaterial: {fileID: -3594494495797603907, guid: 18efc7fd03543a4458e0df38d4e6ca6d, type: 2}
